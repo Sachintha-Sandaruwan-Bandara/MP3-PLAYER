@@ -5,35 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MP3 Player</title>
   <style>
-    p{color: yellow}
-
     body {
-      background-image: url("/assets/images.jpeg");
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 20px;
     }
 
     audio {
-
       width: 100%;
       max-width: 400px;
       margin: 20px 0;
+    }
 
+    select {
+      margin: 10px 0;
     }
   </style>
 </head>
 <body>
 <h1>MP3 Player</h1>
 
-<audio controls id="s">
-  <source src="/assets/song.mp3" type="audio/mp3">
+<select id="songList" onchange="changeSong()">
+  <option value="/assets/song.mp3">eka deka monara kasi</option>
+  <option value="song2.mp3">Song 2</option>
+ \
+</select>
+
+<audio id="audioPlayer" controls>
+  <source id="audioSource" src="song1.mp3" type="audio/mp3">
   Your browser does not support the audio element.
 </audio>
 
-<p >Controls: Play, Pause, Volume</p>
-<div>
+<script>
+  function changeSong() {
+    var select = document.getElementById("songList");
+    var audioSource = document.getElementById("audioSource");
 
-</div>
+    // Set the source of the audio element to the selected song
+    audioSource.src = select.options[select.selectedIndex].value;
+
+    // Load and play the new audio source
+    document.getElementById("audioPlayer").load();
+    document.getElementById("audioPlayer").play();
+  }
+</script>
 </body>
 </html>
